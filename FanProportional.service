@@ -1,0 +1,9 @@
+[Unit]
+Description=Service for FanProportional
+
+[Service]
+ExecStart=/usr/local/sbin/FanProportional.py
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
