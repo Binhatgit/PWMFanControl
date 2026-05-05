@@ -5,7 +5,7 @@ Simple script to control a PWM fan on a Raspberry Pi based on CPU temperature.
 Debian GNU/Linux 11 (Linux 6.1.21) (bullseye) on aarch64 
 Raspberry Pi 4 Model B Rev 1.2
 
-# Bullseye version. Fix unstable by rolling back the firmware update [rpi-update] to the stable version.
+> Bullseye version. Fix unstable by rolling back the firmware update [rpi-update] to the stable version.
 ```
 sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
 ```
@@ -14,13 +14,16 @@ sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
 ```
 cat /sys/class/thermal/thermal_zone0/temp 
 ```
-> FanProportional is less noise. The FanStepped script ramps up the fan speed in steps. 
-
 # INSTALL
-
+> FanProportional is less noise. The FanStepped script ramps up the fan speed in steps. 
+```
+git clone https://github.com/Binhatgit/PWMFanControl.git
+cd PWMFanControl
+```
 ## Install FanStepped #########################################
 ```
 sudo cp FanStepped.py /usr/local/sbin
+chmod +x /usr/local/sbin/FanStepped.py
 sudo cp FanStepped.service /etc/systemd/system/
 
 systemctl daemon-reload
@@ -46,6 +49,7 @@ systemctl disable --no-pager FanStepped.service
 ## Install FanProportional #########################################
 ```
 sudo cp FanProportional.py /usr/local/sbin
+chmod +x /usr/local/sbin/FanProportional.py
 sudo cp FanProportional.service /etc/systemd/system/
 
 systemctl start --no-pager FanProportional.service
@@ -62,6 +66,11 @@ sudo systemctl status FanProportional.service
 nano /etc/systemd/system/FanProportional.service
 nano /usr/local/sbin/FanProportional.py
 ```
+#Check Fan speed
+```
+sudo python3 read_fan_speed.py
+```
+
 #Board layout 
 ```
 Fan pin
