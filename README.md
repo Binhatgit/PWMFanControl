@@ -5,20 +5,20 @@ Simple script to control a PWM fan on a Raspberry Pi based on CPU temperature.
 Debian GNU/Linux 11 (Linux 6.1.21) (bullseye) on aarch64 
 Raspberry Pi 4 Model B Rev 1.2
 
-#Bullseye version. Fix unstable by rolling back the firmware update [rpi-update] to the stable version.
+# Bullseye version. Fix unstable by rolling back the firmware update [rpi-update] to the stable version.
 ```
 sudo apt-get install --reinstall raspberrypi-bootloader raspberrypi-kernel
 ```
 
-> #Check temperature
+# Check temperature
 ```
 cat /sys/class/thermal/thermal_zone0/temp 
 ```
 > FanProportional is less noise. The FanStepped script ramps up the fan speed in steps. 
 
-> #INSTALL
+# INSTALL
 
-> #Install FanStepped #########################################
+## Install FanStepped #########################################
 ```
 sudo cp FanStepped.py /usr/local/sbin
 sudo cp FanStepped.service /etc/systemd/system/
@@ -28,7 +28,7 @@ systemctl enable --no-pager FanStepped.service
 systemctl restart --no-pager FanStepped.service
 systemctl status --no-pager FanStepped.service
 ```
-> #Edit and check
+### Edit and check
 ```
 sudo nano /usr/local/sbin/FanStepped.py
 sudo systemctl stop --no-pager FanStepped.service
@@ -37,13 +37,13 @@ sudo systemctl restart --no-pager FanStepped.service && sudo systemctl status --
 sudo systemctl restart --no-pager FanStepped.service
 sudo systemctl status --no-pager FanStepped.service
 ```
-> #Remove
+#### Remove
 ```
 systemctl stop --no-pager FanStepped.service
 systemctl disable --no-pager FanStepped.service
 ```
 
-> #Install FanProportional #########################################
+## Install FanProportional #########################################
 ```
 sudo cp FanProportional.py /usr/local/sbin
 sudo cp FanProportional.service /etc/systemd/system/
@@ -57,7 +57,7 @@ systemctl status --no-pager FanProportional.service
 sudo systemctl start FanProportional.service
 sudo systemctl status FanProportional.service
 ```
-> #Edit and check
+### Edit and check
 ```
 nano /etc/systemd/system/FanProportional.service
 nano /usr/local/sbin/FanProportional.py
