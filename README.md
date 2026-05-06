@@ -17,6 +17,7 @@ cat /sys/class/thermal/thermal_zone0/temp
 # INSTALL
 > FanProportional is less noise. The FanStepped script ramps up the fan speed in steps. 
 ```
+cd ~
 git clone https://github.com/Binhatgit/PWMFanControl.git
 cd PWMFanControl
 ```
@@ -66,20 +67,20 @@ sudo systemctl status FanProportional.service
 nano /etc/systemd/system/FanProportional.service
 nano /usr/local/sbin/FanProportional.py
 ```
-# Check Fan speed and temperature
+# CHECK Fan speed and temperature
 ```
 sudo python3 read_fan_speed.py
 vcgencmd measure_temp
 
 ```
 
-# stress test
+## stress test
 ```
 wget https://raw.githubusercontent.com/ssvb/cpuburn-arm/master/cpuburn-a53.S
 gcc -o cpuburn-a53 cpuburn-a53.S
 ./cpuburn-a53
 ```
-#Board layout 
+> Board layout 
 ```
 Fan pin
 |.........................|                        
@@ -89,14 +90,17 @@ Fan pin
 |                 |       |
 |                 |       |
 |                 |       |
-|                 | 33    |-----> Tachometer - fan speed (BCM 13)
-|                 | 35    |<----- PWM for Fan drive speed (BCM 19)
+|              33 |       |-----> Tachometer - fan speed (BCM 13)
+|              35 |       |<----- PWM for Fan drive speed (BCM 19)
 |                 | 37    |
 |                 | 39    |
 |.........................|
 
 ```
-#gpio readall
+> Read current pinout status 
+```
+gpio readall
+```
 ```
  +-----+-----+---------+------+---+---Pi 4B--+---+------+---------+-----+-----+
  | BCM | wPi |   Name  | Mode | V | PHYSICAL | V | Mode | Name    | wPi | BCM |
