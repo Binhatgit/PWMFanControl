@@ -40,7 +40,7 @@ sudo systemctl restart --no-pager FanStepped.service && sudo systemctl status --
 sudo systemctl restart --no-pager FanStepped.service
 sudo systemctl status --no-pager FanStepped.service
 ```
-#### Remove
+#### Remove/Uninstall
 ```
 systemctl stop --no-pager FanStepped.service
 systemctl disable --no-pager FanStepped.service
@@ -66,11 +66,19 @@ sudo systemctl status FanProportional.service
 nano /etc/systemd/system/FanProportional.service
 nano /usr/local/sbin/FanProportional.py
 ```
-#Check Fan speed
+# Check Fan speed and temperature
 ```
 sudo python3 read_fan_speed.py
+vcgencmd measure_temp
+
 ```
 
+# stress test
+```
+wget https://raw.githubusercontent.com/ssvb/cpuburn-arm/master/cpuburn-a53.S
+gcc -o cpuburn-a53 cpuburn-a53.S
+./cpuburn-a53
+```
 #Board layout 
 ```
 Fan pin
